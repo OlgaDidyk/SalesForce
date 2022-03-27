@@ -20,7 +20,7 @@ public class BaseTest {
     @BeforeMethod
 
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/windowsChrome99/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         //chromeOptions.addArguments("headless");
         chromeOptions.addArguments("--disable-notifications");
