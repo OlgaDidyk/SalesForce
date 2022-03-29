@@ -9,6 +9,7 @@ import pages.AccountPage;
 import pages.ContactsPage;
 import pages.HomePage;
 import pages.SalesforceLoginPage;
+import utils.PropertiesUtils;
 
 public class MainSteps extends AbstractStep {
 
@@ -18,8 +19,10 @@ public class MainSteps extends AbstractStep {
     private ContactsPage contactsPage;
     private AccountsButton accountsButton;
     private ContactsButton contactsButton;
-    private static final String VALID_LOGIN = System.getProperty("login");
-    private static final String VALID_PASSWORD = System.getProperty("password");
+    //private static final String VALID_LOGIN = System.getProperty("login");
+    //private static final String VALID_PASSWORD = System.getProperty("password");
+    public static String VALID_LOGIN = PropertiesUtils.getEnv("valid_login");
+    public static String VALID_PASSWORD = PropertiesUtils.getEnv("valid_password");
 
     public MainSteps(WebDriver driver) {
         super(driver);

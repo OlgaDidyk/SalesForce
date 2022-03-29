@@ -20,7 +20,7 @@ public class BaseTest {
     @BeforeMethod
 
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/windowsChrome99/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         //chromeOptions.addArguments("headless");
         chromeOptions.addArguments("--disable-notifications");
@@ -28,7 +28,7 @@ public class BaseTest {
         chromeOptions.addArguments("--ignore-certificate-errors");
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         mainSteps = new MainSteps(driver);
         accountsSteps = new AccountsSteps(driver);
     }
