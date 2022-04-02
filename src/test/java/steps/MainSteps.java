@@ -3,6 +3,7 @@ package steps;
 import components.buttons.menu.AccountsButton;
 import components.buttons.menu.ContactsButton;
 import components.buttons.menu.MenuButton;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import pages.AccountPage;
@@ -28,6 +29,7 @@ public class MainSteps extends AbstractStep {
         super(driver);
     }
 
+    @Step("Opening login page")
     public MainSteps openSalesforceLoginPage() {
         loginPage = new SalesforceLoginPage(driver);
         loginPage.openPage();
@@ -36,6 +38,7 @@ public class MainSteps extends AbstractStep {
 
     }
 
+    @Step("Login with valid credentials {VALID_LOGIN}/{VALID_PASSWORD}")
     public MainSteps loginWithValidCreds() {
         loginPage.authentication(VALID_LOGIN, VALID_PASSWORD);
         homePage = new HomePage(driver);
@@ -43,6 +46,7 @@ public class MainSteps extends AbstractStep {
         return this;
     }
 
+    @Step("Opening Account page")
     public AccountsSteps openAccountPage() {
         accountsButton = new AccountsButton(driver);
         Assert.assertTrue(accountsButton.isComponentDisplayed(MenuButton.buttonLocator),
@@ -53,6 +57,7 @@ public class MainSteps extends AbstractStep {
         return new AccountsSteps(driver);
     }
 
+    @Step("Opening Contacts page")
     public ContactsSteps openContactsPage() {
         contactsButton = new ContactsButton(driver);
         Assert.assertTrue(contactsButton.isComponentDisplayed(MenuButton.buttonLocator),

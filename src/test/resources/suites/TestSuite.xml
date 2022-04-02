@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <!--<suite name="Tests Suite" thread-count="3" parallel="tests" >-->
-<suite name="Tests Suite">
+<suite name="Tests Suite" >
     <test name="AddAccountTest">
         <classes>
             <class name="salesforce.AddAccountTest"/>

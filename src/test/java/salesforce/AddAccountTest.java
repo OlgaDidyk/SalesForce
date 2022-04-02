@@ -1,7 +1,11 @@
 package salesforce;
 
 import builders.AccountBuilder;
+import io.qameta.allure.Description;
+import io.qameta.allure.Link;
+import io.qameta.allure.Step;
 import model.AccountModel;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.AccountModelUtils;
@@ -15,13 +19,15 @@ public class AddAccountTest extends BaseTest {
             .build();
 
     @BeforeMethod
+    @Link("https://www.salesforce.com/")
     private void login() {
         mainSteps
                 .openSalesforceLoginPage()
                 .loginWithValidCreds();
     }
 
-    @Test
+    @Test (description = "Test to add a new Account")
+    //@Description("Some description from the @Description annotation")
     public void addNewAccountTest() {
         mainSteps
                 .openAccountPage()
