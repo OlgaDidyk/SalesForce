@@ -4,6 +4,7 @@ import components.account.AccountDetailsComponent;
 import components.forms.CreateAccountFormComponent;
 import components.forms.DropDown;
 import components.forms.Input;
+import io.qameta.allure.Step;
 import model.AccountModel;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -18,6 +19,7 @@ public class AccountsSteps extends AbstractStep {
     }
 
 
+    @Step("Creating a new account")
     public AccountsSteps createNewAccount(AccountModel accountModel) {
         accountPage = new AccountPage(driver);
         accountPage.openNewAccountForm();
@@ -33,6 +35,7 @@ public class AccountsSteps extends AbstractStep {
         return this;
     }
 
+    @Step("Filling the form during creating a new account")
     private void fillAccountForm(AccountModel accountModel) {
         Input accountNameInput = new Input(driver, "Account Name");
         accountNameInput.insert(accountModel.getAccountName());
@@ -43,6 +46,7 @@ public class AccountsSteps extends AbstractStep {
         new DropDown(driver, "Industry").selectAccountOption(accountModel.getIndustry());
     }
 
+    @Step("Validation if new account is created")
     public void validateAccountCreated(AccountModel expectedModel) {
         accountPage.openDetailsTab();
         AccountModel actualModel = getActualAccountModel();
@@ -52,6 +56,7 @@ public class AccountsSteps extends AbstractStep {
                 String.format("Account is not valid: %s", actualModel));
     }
 
+    @Step("To get an account model")
     private AccountModel getActualAccountModel() {
         AccountModel accountModel = new AccountModel();
         accountModel.setAccountName(new AccountDetailsComponent(driver, "Account Name").getValueAccountNameTypeIndustryFields());

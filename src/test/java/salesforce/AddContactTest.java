@@ -2,6 +2,8 @@ package salesforce;
 
 import builders.AccountBuilder;
 import builders.ContactsBuilder;
+import io.qameta.allure.Description;
+import io.qameta.allure.Link;
 import model.AccountModel;
 import model.ContactsModel;
 import org.testng.annotations.BeforeMethod;
@@ -22,13 +24,15 @@ public class AddContactTest extends BaseTest {
             .build();
 
     @BeforeMethod
+    @Link("https://www.salesforce.com/")
     private void login() {
         mainSteps
                 .openSalesforceLoginPage()
                 .loginWithValidCreds();
     }
 
-    @Test
+    @Test (description = "Test to add a new Contact")
+    //@Description("Some description from the @Description annotation")
     public void addNewContactTest() {
         mainSteps
                 .openContactsPage()

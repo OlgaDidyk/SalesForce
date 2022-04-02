@@ -7,7 +7,7 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('tests') {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/OlgaDidyk/SalesForce.git'
@@ -28,5 +28,21 @@ pipeline {
                 }
             }
         }
+
+        //Стейдж для Аллюра
+        stage('reports') {
+         steps {
+             script {
+                     allure([
+                             includeProperties: false,
+                             jdk: '',
+                             properties: [],
+                             reportBuildPolicy: 'ALWAYS',
+                             results: [[path: 'target/allure-results']]
+                     ])
+             }
+         }
+        }
+
     }
 }
