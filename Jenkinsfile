@@ -30,7 +30,7 @@ pipeline {
         }
 
         //Стейдж для Аллюра
-        stage('reports') {
+/*         stage('reports') {
          steps {
              script {
                      allure([
@@ -42,7 +42,7 @@ pipeline {
                      ])
              }
          }
-        }
+        } */
 
     }
 }
