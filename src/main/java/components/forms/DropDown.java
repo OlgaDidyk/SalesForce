@@ -53,6 +53,7 @@ public class DropDown extends AbstractComponent {
         openOptionsPopup(locator);
         By optionLocator = By.xpath(String.format(CONTACT_OPTION_LIST_PATTERN, optionName));
         explicitlyWait.until(ExpectedConditions.visibilityOfElementLocated(optionLocator));
+        //TODO JavascriptClick
         driver.findElement(optionLocator).click();
 
     }
