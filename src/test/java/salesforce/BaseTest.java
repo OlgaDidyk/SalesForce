@@ -28,7 +28,7 @@ public class BaseTest {
         chromeOptions.addArguments("--ignore-certificate-errors");
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         mainSteps = new MainSteps(driver);
         accountsSteps = new AccountsSteps(driver);
     }
