@@ -6,9 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
 
-    //private static final String BASE_URL = "https://ewavecommerce2.lightning.force.com/lightning/page/home";
     private static final String BASE_URL = "https://ewavecommerce3.lightning.force.com/one/one.app";
-    //private static final String BASE_URL = "https://login.salesforce.com/";
     public static final By HEADER = By.xpath("//h1[contains(., 'Home')]");
 
     public HomePage(WebDriver driver) {
@@ -18,7 +16,6 @@ public class HomePage extends BasePage {
     @Override
     public void waitPageLoaded() {
         explicitlyWait.until(ExpectedConditions.visibilityOfElementLocated(HEADER));
-
     }
 
     @Override

@@ -1,18 +1,24 @@
 package steps;
 
-import components.account.AccountDetailsComponent;
-import components.forms.CreateAccountFormComponent;
-import components.forms.DropDown;
-import components.forms.Input;
+import components.details.accountsDetailsFields.AccountNameTypeIndustry;
+import components.details.accountsDetailsFields.Employees;
+import components.details.accountsDetailsFields.PhoneWebsite;
+import components.forms.AccountForm;
+import components.forms.ContactForm;
+import components.otherComponents.dropDowns.AccountsDropDown;
+import components.otherComponents.inputs.AccountsInput;
+import components.otherComponents.DetailsTab;
 import io.qameta.allure.Step;
 import model.AccountModel;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import pages.AccountPage;
 
+
 public class AccountsSteps extends AbstractStep {
 
     private AccountPage accountPage;
+    public DetailsTab detailsTab;
 
     public AccountsSteps(WebDriver driver) {
         super(driver);
@@ -21,34 +27,39 @@ public class AccountsSteps extends AbstractStep {
 
     @Step("Creating a new account")
     public AccountsSteps createNewAccount(AccountModel accountModel) {
+        log.info("Creating a new account");
         accountPage = new AccountPage(driver);
-        accountPage.openNewAccountForm();
-        CreateAccountFormComponent form = new CreateAccountFormComponent(driver);
+        accountPage.openNewForm();
+        AccountForm form = new AccountForm(driver);
+        detailsTab = new DetailsTab(driver);
 
-        Assert.assertTrue(
-                form.isComponentDisplayed(),
-                form.getClass().getSimpleName().concat(" not displayed"));
+/*        Assert.assertTrue(
+                form.isFormDisplayed(AccountForm.HEADER),
+                form.getClass().getSimpleName().concat(" not displayed"));*/
 
+        MainSteps.isFormDisplayed(form, AccountForm.HEADER);
         fillAccountForm(accountModel);
-        form.save();
+        form.saveForm(AccountForm.SAVE_BUTTON);
         validatePageIsLoaded(accountPage);
         return this;
     }
 
     @Step("Filling the form during creating a new account")
     private void fillAccountForm(AccountModel accountModel) {
-        Input accountNameInput = new Input(driver, "Account Name");
+        log.info("Filling the Account form");
+        AccountsInput accountNameInput = new AccountsInput(driver, "Account Name");
         accountNameInput.insert(accountModel.getAccountName());
-        new Input(driver, "Phone").insert(accountModel.getPhone());
-        new Input(driver, "Website").insert(accountModel.getWebsite());
-        new Input(driver, "Employees").insert(String.valueOf(accountModel.getEmployees()));
-        new DropDown(driver, "Type").selectAccountOption(accountModel.getType());
-        new DropDown(driver, "Industry").selectAccountOption(accountModel.getIndustry());
+        new AccountsInput(driver, "Phone").insert(accountModel.getPhone());
+        new AccountsInput(driver, "Website").insert(accountModel.getWebsite());
+        new AccountsInput(driver, "Employees").insert(String.valueOf(accountModel.getEmployees()));
+        new AccountsDropDown(driver, "Industry").selectAccountOption(accountModel.getIndustry());
+        new AccountsDropDown(driver,"Type").selectAccountOption(accountModel.getType());
     }
 
     @Step("Validation if new account is created")
     public void validateAccountCreated(AccountModel expectedModel) {
-        accountPage.openDetailsTab();
+        log.info("Validation created account");
+        detailsTab.openDetailsTab();
         AccountModel actualModel = getActualAccountModel();
         Assert.assertEquals(
                 actualModel,
@@ -58,14 +69,14 @@ public class AccountsSteps extends AbstractStep {
 
     @Step("To get an account model")
     private AccountModel getActualAccountModel() {
+        log.info("Creating an actual account model");
         AccountModel accountModel = new AccountModel();
-        accountModel.setAccountName(new AccountDetailsComponent(driver, "Account Name").getValueAccountNameTypeIndustryFields());
-        accountModel.setPhone(new AccountDetailsComponent(driver, "Phone").getValuePhoneWebsiteFields());
-        accountModel.setWebsite(new AccountDetailsComponent(driver, "Website").getValuePhoneWebsiteFields());
-        accountModel.setEmployees(Integer.parseInt(new AccountDetailsComponent(driver, "Employees").getValueEmployeesField()));
-        accountModel.setType(new AccountDetailsComponent(driver, "Type").getValueAccountNameTypeIndustryFields());
-        accountModel.setIndustry(new AccountDetailsComponent(driver, "Industry").getValueAccountNameTypeIndustryFields());
-
+        accountModel.setAccountName(new AccountNameTypeIndustry(driver, "Account Name").getFieldValue());
+        accountModel.setPhone(new PhoneWebsite(driver, "Phone").getFieldValue());
+        accountModel.setWebsite(new PhoneWebsite(driver, "Website").getFieldValue());
+        accountModel.setEmployees(Integer.parseInt(new Employees(driver, "Employees").getFieldValue()));
+        accountModel.setType(new AccountNameTypeIndustry(driver, "Type").getFieldValue());
+        accountModel.setIndustry(new AccountNameTypeIndustry(driver, "Industry").getFieldValue());
         return accountModel;
     }
 

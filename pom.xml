@@ -36,6 +36,23 @@
             <artifactId>allure-testng</artifactId>
             <version>2.17.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.13.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -46,6 +63,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
+                    <threadCount>1</threadCount>
+                    <parallel>tests</parallel>
                     <environmentVariables>
                         <browser>${default.browser}</browser>
                     </environmentVariables>

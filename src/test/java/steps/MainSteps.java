@@ -1,25 +1,27 @@
 package steps;
 
-import components.buttons.menu.AccountsButton;
-import components.buttons.menu.ContactsButton;
-import components.buttons.menu.MenuButton;
+import components.forms.BaseForm;
+import components.menuButtons.AccountsButton;
+import components.menuButtons.ContactsButton;
+import components.menuButtons.MenuButton;
+import components.menuButtons.OpportunitiesButton;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import pages.AccountPage;
-import pages.ContactsPage;
-import pages.HomePage;
-import pages.SalesforceLoginPage;
+import pages.*;
 import utils.PropertiesUtils;
 
 public class MainSteps extends AbstractStep {
 
-    private SalesforceLoginPage loginPage;
+    private LoginPage loginPage;
     private HomePage homePage;
     private AccountPage accountPage;
     private ContactsPage contactsPage;
+    private OpportunitiesPage opportunitiesPage;
     private AccountsButton accountsButton;
     private ContactsButton contactsButton;
+    private OpportunitiesButton opportunitiesButton;
     //private static final String VALID_LOGIN = System.getProperty("login");
     //private static final String VALID_PASSWORD = System.getProperty("password");
     public static String VALID_LOGIN = PropertiesUtils.getEnv("valid_login");
@@ -30,8 +32,9 @@ public class MainSteps extends AbstractStep {
     }
 
     @Step("Opening login page")
-    public MainSteps openSalesforceLoginPage() {
-        loginPage = new SalesforceLoginPage(driver);
+    public MainSteps openLoginPage() {
+        log.info("Opening login page");
+        loginPage = new LoginPage(driver);
         loginPage.openPage();
         validatePageIsLoaded(loginPage);
         return this;
@@ -40,17 +43,19 @@ public class MainSteps extends AbstractStep {
 
     @Step("Login with valid credentials {VALID_LOGIN}/{VALID_PASSWORD}")
     public MainSteps loginWithValidCreds() {
+        log.info("Login with valid credentials");
         loginPage.authentication(VALID_LOGIN, VALID_PASSWORD);
         homePage = new HomePage(driver);
         validatePageIsLoaded(homePage);
         return this;
     }
 
+    //TODO вынести Ассерт  в отдельный метод
     @Step("Opening Account page")
     public AccountsSteps openAccountPage() {
+        log.info("Opening Account page");
         accountsButton = new AccountsButton(driver);
-        Assert.assertTrue(accountsButton.isComponentDisplayed(MenuButton.buttonLocator),
-                accountsButton.getClass().getSimpleName().concat(" not displayed"));
+        isMenuButtonDisplayed(accountsButton);
         accountsButton.click();
         accountPage = new AccountPage(driver);
         validatePageIsLoaded(accountPage);
@@ -59,12 +64,46 @@ public class MainSteps extends AbstractStep {
 
     @Step("Opening Contacts page")
     public ContactsSteps openContactsPage() {
+        log.info("Opening Contacts page");
         contactsButton = new ContactsButton(driver);
-        Assert.assertTrue(contactsButton.isComponentDisplayed(MenuButton.buttonLocator),
-                contactsButton.getClass().getSimpleName().concat(" not displayed"));
+        isMenuButtonDisplayed(contactsButton);
         contactsButton.click();
         contactsPage = new ContactsPage(driver);
         validatePageIsLoaded(contactsPage);
         return new ContactsSteps(driver);
     }
+
+    @Step("Opening Opportunities page")
+    public OpportunitiesSteps openOpportunitiesPage() {
+        log.info("Opening Opportunities page");
+        opportunitiesButton = new OpportunitiesButton(driver);
+        isMenuButtonDisplayed(opportunitiesButton);
+        opportunitiesButton.click();
+        opportunitiesPage = new OpportunitiesPage(driver);
+        validatePageIsLoaded(opportunitiesPage);
+        return new OpportunitiesSteps(driver);
+    }
+
+    public MainSteps openPage(MenuButton menuButton, BasePage basePage) {
+        isMenuButtonDisplayed(menuButton);
+        menuButton.click();
+        validatePageIsLoaded(basePage);
+        return this;
+
+    }
+
+    public void isMenuButtonDisplayed(MenuButton menuButton) {
+        log.info("Validation if Menu Button is displayed");
+        Assert.assertTrue(menuButton.isComponentDisplayed(MenuButton.buttonLocator),
+                menuButton.getClass().getSimpleName().concat(" not displayed"));
+    }
+
+    public static void isFormDisplayed(BaseForm form, By header) {
+        log.info("Validation if Menu Form is displayed");
+        Assert.assertTrue(
+                form.isFormDisplayed(header),
+                form.getClass().getSimpleName().concat(" not displayed"));
+    }
+
+
 }

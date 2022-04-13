@@ -12,4 +12,9 @@
             <class name="salesforce.AddContactTest"/>
         </classes>
     </test> <!-- Test -->
+    <test name="Add Opportunity  test">
+        <classes>
+            <class name="salesforce.AddOpportunitiesTest"/>
+        </classes>
+    </test> <!-- Test -->
 </suite>
