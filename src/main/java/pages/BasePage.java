@@ -1,5 +1,7 @@
 package pages;
 
+import components.AbstractComponent;
+import components.otherComponents.Buttons;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -8,12 +10,14 @@ import org.openqa.selenium.WebDriver;
 import java.time.Duration;
 
 
-public abstract class BasePage {
+public abstract class BasePage extends AbstractComponent {
 
+    //TODO это расширенная версия АбстрактКомпонента
     WebDriver driver;
     WebDriverWait explicitlyWait;
 
     public BasePage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         this.explicitlyWait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
@@ -23,6 +27,7 @@ public abstract class BasePage {
     abstract public BasePage openPage();
 
     public boolean isPageLoaded() {
+        log.info("Loading a page");
         try {
             waitPageLoaded();
         } catch (TimeoutException ex) {
@@ -30,6 +35,13 @@ public abstract class BasePage {
             return false;
         }
         return true;
+    }
+
+    public void openNewForm() {
+        log.info("Opening a form");
+        Buttons buttons = new Buttons(driver);
+        buttons.clickNewButton();
+
     }
 
 }

@@ -1,4 +1,4 @@
-package components.buttons.menu;
+package components.menuButtons;
 
 import org.openqa.selenium.WebDriver;
 

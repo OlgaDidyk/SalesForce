@@ -1,5 +1,7 @@
 package components;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +14,7 @@ public abstract class AbstractComponent {
 
     protected static WebDriver driver;
     protected WebDriverWait explicitlyWait;
+    public static Logger log = LogManager.getLogger();
 
 
     public AbstractComponent(WebDriver driver) {

@@ -1,19 +1,39 @@
 package model;
 
+import lombok.*;
+
 import java.util.Objects;
 
 //Модели используются всегда и везде. Через модели работают почти все фреймворки
 // в пакете model хранятся сущности. В нашем случае сущность - это Аккаунт, Contacts
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+
 public class AccountModel {
 
-    String AccountName;
-    String Phone;
-    String Website;
-    int Employees;
-    String Type;
-    String Industry;
+    @Builder.Default
+    public static String accountName = "USERNAME";
+    @Builder.Default
+    public String phone = "+3245242352";
+    @Builder.Default
+    public String website = "teachmeskills.by";
+    @Builder.Default
+    public int employees = 10;
+    @Builder.Default
+    public String type = "Customer";
+    @Builder.Default
+    public String industry = "Banking";
 
+    public String getAccountName() {
+        return accountName;
+    }
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+/*
 // Объект pojo(java объект) должен обязательно содержать пустой конструктор, геттеры и сеттеры,
 // переопределить equals и hashcode для того чтобы сравнивать эти объекты
 
@@ -94,4 +114,5 @@ public class AccountModel {
                 ", Industry='" + Industry + '\'' +
                 '}';
     }
+*/
 }

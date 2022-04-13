@@ -1,15 +1,50 @@
 package model;
 
-import java.util.Objects;
+import lombok.*;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
 public class ContactsModel {
 
-    String Salutation;
-    String FirstName;
-    String LastName;
-    String AccountName;
+    @Builder.Default
+    public static String salutation = "Ms.";
+    @Builder.Default
+    public static String firstName = "FirstName";
+    @Builder.Default
+    public static String lastName = "LastName";
+    @Builder.Default
+    public  String accountName = AccountModel.accountName;
+    //@Builder.Default
+    public String name = salutation + " " + firstName + " " + lastName;
 
-    public ContactsModel() {
+    public String getSalutation() {
+        return salutation;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+/*    public void setSalutation(String salutation) {
+        this.salutation = salutation;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }*/
+
+   /* public ContactsModel() {
     }
 
     public String getSalutation() {
@@ -55,5 +90,5 @@ public class ContactsModel {
     @Override
     public int hashCode() {
         return Objects.hash(Salutation, FirstName, LastName, AccountName);
-    }
+    }*/
 }

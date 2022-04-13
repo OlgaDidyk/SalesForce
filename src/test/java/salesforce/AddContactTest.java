@@ -1,50 +1,51 @@
 package salesforce;
 
-import builders.AccountBuilder;
-import builders.ContactsBuilder;
-import io.qameta.allure.Description;
 import io.qameta.allure.Link;
-import model.AccountModel;
 import model.ContactsModel;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import utils.ContactModelUtils;
+import utils.TestListener;
 
+@Listeners({TestListener.class})
 public class AddContactTest extends BaseTest {
 
-    static String accountName = "USERNAME";
-    static String salutation = "Ms.";
+/*    static String salutation = "Ms.";
     static String firstName = "FirstName";
-    static String lastName = "LastName";
+    static String lastName = "LastName";*/
 
-    ContactsModel contactModel = ContactModelUtils.getDefaultContactModel();
-    ContactsModel testAccount2 = ContactsBuilder
-            .defaultContact()
-            //.setPhone("123")
+/*    ContactsModel contactModel = ContactsModel.builder()
+            .salutation(salutation)
+            .firstName(firstName)
+            .lastName(lastName)
+            .accountName(AddAccountTest.accountName)
+            .build();*/
+
+/*    ContactsModel contactsModelSplitName = ContactsModel.builder()
+            .name(salutation + " " + firstName + " " + lastName)
+            .accountName(AddAccountTest.accountName)
+            .build();*/
+
+    ContactsModel defaultModel = ContactsModel.builder().build();
+    ContactsModel defaultModelSplitName = ContactsModel.builder()
+            .name(ContactsModel.salutation + " " + ContactsModel.firstName + " " + ContactsModel.lastName)
             .build();
+
 
     @BeforeMethod
     @Link("https://www.salesforce.com/")
     private void login() {
         mainSteps
-                .openSalesforceLoginPage()
+                .openLoginPage()
                 .loginWithValidCreds();
     }
 
-    @Test (description = "Test to add a new Contact")
-    //@Description("Some description from the @Description annotation")
+    @Test(description = "Test to add a new Contact")
     public void addNewContactTest() {
         mainSteps
                 .openContactsPage()
-                .createNewContact(contactModel)
-                .validateContactCreated();
+                .createNewContact(defaultModel)
+                .validateContactCreated(defaultModelSplitName);
     }
 
-    private ContactsModel buildTestContact(){
-        return ContactsBuilder.newValues()
-                .setSalutation(salutation)
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setAccountName(accountName)
-                .build();
-    }}
+}
