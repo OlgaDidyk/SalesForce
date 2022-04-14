@@ -2,19 +2,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <!--<suite name="Tests Suite" thread-count="3" parallel="tests" >-->
 <suite name="Tests Suite" >
-    <test name="AddAccountTest">
+    <test name="Add Account Test">
         <classes>
-            <class name="salesforce.AddAccountTest"/>
+            <class name="tests.AddAccountTest"/>
         </classes>
     </test> <!-- Test -->
     <test name="Add Contact test">
         <classes>
-            <class name="salesforce.AddContactTest"/>
+            <class name="tests.AddContactTest"/>
         </classes>
     </test> <!-- Test -->
     <test name="Add Opportunity  test">
         <classes>
-            <class name="salesforce.AddOpportunitiesTest"/>
+            <class name="tests.AddOpportunitiesTest"/>
         </classes>
     </test> <!-- Test -->
 </suite>

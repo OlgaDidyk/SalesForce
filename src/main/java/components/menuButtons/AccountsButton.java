@@ -2,7 +2,7 @@ package components.menuButtons;
 
 import org.openqa.selenium.WebDriver;
 
-public class AccountsButton extends MenuButton { //отдельный класс для каждого лейбла
+public class AccountsButton extends MenuButton {
 
     public static final String ACCOUNT_BUTTON_LABEL = "Accounts";
 

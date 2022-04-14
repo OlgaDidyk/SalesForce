@@ -4,7 +4,6 @@ import components.details.accountsDetailsFields.AccountNameTypeIndustry;
 import components.details.accountsDetailsFields.Employees;
 import components.details.accountsDetailsFields.PhoneWebsite;
 import components.forms.AccountForm;
-import components.forms.ContactForm;
 import components.otherComponents.dropDowns.AccountsDropDown;
 import components.otherComponents.inputs.AccountsInput;
 import components.otherComponents.DetailsTab;
@@ -32,11 +31,6 @@ public class AccountsSteps extends AbstractStep {
         accountPage.openNewForm();
         AccountForm form = new AccountForm(driver);
         detailsTab = new DetailsTab(driver);
-
-/*        Assert.assertTrue(
-                form.isFormDisplayed(AccountForm.HEADER),
-                form.getClass().getSimpleName().concat(" not displayed"));*/
-
         MainSteps.isFormDisplayed(form, AccountForm.HEADER);
         fillAccountForm(accountModel);
         form.saveForm(AccountForm.SAVE_BUTTON);
@@ -53,7 +47,7 @@ public class AccountsSteps extends AbstractStep {
         new AccountsInput(driver, "Website").insert(accountModel.getWebsite());
         new AccountsInput(driver, "Employees").insert(String.valueOf(accountModel.getEmployees()));
         new AccountsDropDown(driver, "Industry").selectAccountOption(accountModel.getIndustry());
-        new AccountsDropDown(driver,"Type").selectAccountOption(accountModel.getType());
+        new AccountsDropDown(driver, "Type").selectAccountOption(accountModel.getType());
     }
 
     @Step("Validation if new account is created")
@@ -69,7 +63,6 @@ public class AccountsSteps extends AbstractStep {
 
     @Step("To get an account model")
     private AccountModel getActualAccountModel() {
-        log.info("Creating an actual account model");
         AccountModel accountModel = new AccountModel();
         accountModel.setAccountName(new AccountNameTypeIndustry(driver, "Account Name").getFieldValue());
         accountModel.setPhone(new PhoneWebsite(driver, "Phone").getFieldValue());

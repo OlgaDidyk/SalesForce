@@ -3,7 +3,6 @@ package steps;
 import components.details.opportunityDetailsFields.AccountName;
 import components.details.opportunityDetailsFields.OppNameCloseDateStage;
 import components.forms.OpportunitiesForm;
-import components.menuButtons.OpportunitiesButton;
 import components.otherComponents.DetailsTab;
 import components.otherComponents.dropDowns.otherModulesDropDowns.ContactsDropDown;
 import components.otherComponents.dropDowns.otherModulesDropDowns.DropDown;
@@ -60,7 +59,6 @@ public class OpportunitiesSteps extends AbstractStep {
     }
 
     private OpportunitiesModel getActualOpportunitiesModel() {
-        log.info("Creating an actual opportunity model");
         OpportunitiesModel opportunitiesModel = new OpportunitiesModel();
         opportunitiesModel.setAccountName(new AccountName(driver).getAccountNameFieldValue());
         opportunitiesModel.setOpportunityName(new OppNameCloseDateStage(driver, "Opportunity Name").getFieldValue());
@@ -68,17 +66,5 @@ public class OpportunitiesSteps extends AbstractStep {
         opportunitiesModel.setStage(new OppNameCloseDateStage(driver, "Stage").getFieldValue());
         return opportunitiesModel;
     }
-
-/*    @Step("Analog of Sorting in SauceDemo from Lombok lesson")
-    public void validateOpportunityCreated2(OpportunitiesModel expectedModel) {
-        detailsTab.openDetailsTab();
-        OpportunitiesModel actualOpportunityModel = getActualOpportunitiesModel();
-        Assert.assertEquals(
-                actualOpportunityModel,
-                expectedModel,
-                String.format("Opportunity is not valid: %s", actualOpportunityModel));
-    }*/
-
-
 
 }

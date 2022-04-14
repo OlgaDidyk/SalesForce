@@ -60,7 +60,6 @@ public class ContactsSteps extends AbstractStep {
     }
 
     private ContactsModel getActualModel() {
-        log.info("Creating an actual contact model");
         ContactsModel contactsModel = new ContactsModel();
         contactsModel.setName(new Name(driver).getNameFieldValue());
         contactsModel.setAccountName(new AccountName(driver).getAccountNameFieldValue());

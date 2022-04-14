@@ -10,7 +10,6 @@ import pages.BasePage;
 
 public class AbstractStep {
     WebDriver driver;
-    //public DetailsTab detailsTab = new DetailsTab(driver);
 
     static Logger log = LogManager.getLogger();
 
