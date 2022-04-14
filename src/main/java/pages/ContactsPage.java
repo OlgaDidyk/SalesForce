@@ -26,5 +26,4 @@ public class ContactsPage extends BasePage {
     }
 
 
-
 }

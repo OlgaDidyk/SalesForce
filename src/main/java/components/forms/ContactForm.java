@@ -12,12 +12,4 @@ public class ContactForm extends BaseForm {
         super(driver);
     }
 
-/*    public boolean isFormDisplayed() {
-        return isFormDisplayed(HEADER);
-    }
-
-    public void saveForm() {
-        saveForm(SAVE_BUTTON);
-    }*/
-
 }

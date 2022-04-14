@@ -1,11 +1,10 @@
 package pages;
 
-import components.otherComponents.Buttons;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class OpportunitiesPage extends BasePage{
+public class OpportunitiesPage extends BasePage {
 
     private static final String BASE_URL = "https://testtest4.lightning.force.com/lightning/o/Opportunity/list?filterName=Recent";
     public static final By HEADER = By.xpath("//h1[contains(., 'Opportunities')]");
@@ -25,8 +24,4 @@ public class OpportunitiesPage extends BasePage{
         return this;
     }
 
-/*    public void openNewContactForm() {
-        Buttons buttons = new Buttons(driver);
-        buttons.clickNewButton();
-    }*/
 }

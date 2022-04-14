@@ -22,8 +22,6 @@ public class MainSteps extends AbstractStep {
     private AccountsButton accountsButton;
     private ContactsButton contactsButton;
     private OpportunitiesButton opportunitiesButton;
-    //private static final String VALID_LOGIN = System.getProperty("login");
-    //private static final String VALID_PASSWORD = System.getProperty("password");
     public static String VALID_LOGIN = PropertiesUtils.getEnv("valid_login");
     public static String VALID_PASSWORD = PropertiesUtils.getEnv("valid_password");
 
@@ -50,7 +48,6 @@ public class MainSteps extends AbstractStep {
         return this;
     }
 
-    //TODO вынести Ассерт  в отдельный метод
     @Step("Opening Account page")
     public AccountsSteps openAccountPage() {
         log.info("Opening Account page");
@@ -93,13 +90,11 @@ public class MainSteps extends AbstractStep {
     }
 
     public void isMenuButtonDisplayed(MenuButton menuButton) {
-        log.info("Validation if Menu Button is displayed");
         Assert.assertTrue(menuButton.isComponentDisplayed(MenuButton.buttonLocator),
                 menuButton.getClass().getSimpleName().concat(" not displayed"));
     }
 
     public static void isFormDisplayed(BaseForm form, By header) {
-        log.info("Validation if Menu Form is displayed");
         Assert.assertTrue(
                 form.isFormDisplayed(header),
                 form.getClass().getSimpleName().concat(" not displayed"));

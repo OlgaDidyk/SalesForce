@@ -8,9 +8,6 @@ public abstract class BaseInput extends AbstractComponent {
 
 
     public String label;
-    public By accountInputLocator;
-    public By contactInputLocator;
-
 
     public BaseInput(WebDriver driver, String label) {
         super(driver);

@@ -1,4 +1,4 @@
-package salesforce;
+package tests;
 
 import io.qameta.allure.Link;
 import model.OpportunitiesModel;
@@ -10,22 +10,13 @@ import utils.TestListener;
 @Listeners({TestListener.class})
 public class AddOpportunitiesTest extends BaseTest {
 
-
-/*    OpportunitiesModel opportunitiesModel = OpportunitiesModel.builder()
-            .opportunityName("NameModelByLombok")
-            .closeDate("12/24/2023")
-            .stage("Qualification")
-            .accountName(AddAccountTest.accountName)
-            .build();*/
-
     OpportunitiesModel defaultModel = OpportunitiesModel.builder().build();
+    BaseLogin baseLogin = new BaseLogin();
 
     @BeforeMethod
     @Link("https://www.salesforce.com/")
-    private void login() {
-        mainSteps
-                .openLoginPage()
-                .loginWithValidCreds();
+    public void login() {
+        baseLogin.login();
     }
 
 
@@ -33,9 +24,7 @@ public class AddOpportunitiesTest extends BaseTest {
     public void addNewOpportunityTest2() {
         mainSteps
                 .openOpportunitiesPage()
-                //.createNewOpportunity(opportunitiesModel)
                 .createNewOpportunity(defaultModel)
-                //.validateOpportunityCreated(opportunitiesModel);
                 .validateOpportunityCreated(defaultModel);
     }
 

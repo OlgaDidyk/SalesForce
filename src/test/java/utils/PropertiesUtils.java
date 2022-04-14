@@ -20,7 +20,7 @@ public class PropertiesUtils {
     }
 
     // singleton pattern - readProperties() выполнится только один раз, в самом начале
-    public static String get(String propertyKey){
+    public static String get(String propertyKey) {
         if (PROPERTIES == null) {
             readProperties();
         }

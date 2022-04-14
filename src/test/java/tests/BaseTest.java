@@ -1,4 +1,4 @@
-package salesforce;
+package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import steps.AccountsSteps;
 import steps.MainSteps;
@@ -18,7 +17,7 @@ import java.time.Duration;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected MainSteps mainSteps;
+    public static MainSteps mainSteps;
     protected AccountsSteps accountsSteps;
 
 

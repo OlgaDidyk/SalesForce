@@ -23,7 +23,7 @@ public abstract class AbstractComponent {
 
     }
 
-     public boolean isComponentDisplayed(By element){
+    public boolean isComponentDisplayed(By element) {
         try {
             explicitlyWait.until(ExpectedConditions.visibilityOfElementLocated(element));
         } catch (TimeoutException ex) {

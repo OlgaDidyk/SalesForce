@@ -19,7 +19,7 @@ public class OppNameCloseDateStage extends AbstractComponent {
         this.oppNameCloseStageField = By.xpath(String.format(DETAILS_FIELD_PATTERN, label));
     }
 
-    public String getFieldValue(){
+    public String getFieldValue() {
         return driver.findElement(oppNameCloseStageField).getText();
     }
 
